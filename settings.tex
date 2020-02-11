@@ -1,0 +1,133 @@
+\documentclass{report}
+
+%hyperlinks
+\usepackage{hyperref}
+
+%math font
+\usepackage{euler}
+
+%set document margin
+\usepackage[a4paper, top=.8in, bottom=.4in, left=.75in, right=.75in]{geometry}
+
+%font-related stuff
+\usepackage{fontspec}
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+%add toc in toc
+\usepackage{tocbibind}
+
+%we're going to need images
+\usepackage{graphicx}
+
+%set the default font
+\setmainfont[ExternalLocation=fonts/]{Ubuntu-R}%
+  [Ligatures=TeX,
+  BoldFont=Ubuntu-B,
+  ItalicFont=Ubuntu-RI,
+  BoldItalicFont=Ubuntu-BI]
+  
+\setmonofont[ExternalLocation=fonts/]{UbuntuMono-R}
+  [BoldFont=UbuntuMono-B,
+  ItalicFont=UbuntuMono-RI,
+  BoldItalicFont=UbuntuMono-BI]
+
+%fix monospace font
+\usepackage{listings}
+\lstset{columns=fixed, basicstyle=\ttfamily, basewidth=0.5em}
+  
+%set font
+\newfontfamily\secfont[ExternalLocation=fonts/]{Ubuntu-R}
+\newfontfamily\titfont[ExternalLocation=fonts/]{Ubuntu-C}
+
+%enable hyperlinks
+\usepackage{hyperref}
+
+%make paragraphs nice
+\usepackage[parfill]{parskip}
+
+%title formats
+\usepackage{titlesec}
+
+\titleformat*{\section}{\secfont\LARGE}
+\titleformat*{\subsection}{\secfont\itshape\Large}
+\titleformat{\chapter}[display]{\secfont}{\raggedleft\fontsize{60pt}{60pt}\secfont\selectfont\thechapter}{0em}{\raggedleft\fontsize{30pt}{20pt}\secfont\selectfont}
+
+%decrease top spacing of new chapter
+\titlespacing*{\chapter}{0pt}{-30pt}{20pt}
+
+%table stuff
+\usepackage{tabularx}
+
+%stuff for programming
+\usepackage{etoolbox}
+
+%make itemize not suck
+\usepackage{enumitem}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+%appendix functionality
+\usepackage{appendix}
+
+\usepackage{polyglossia}
+\usepackage{csquotes}
+
+%images
+\usepackage{tikz}
+
+%document metadata
+\input{meta.tex}
+
+%ieee bibliography
+\usepackage[
+backend=biber,
+style=alphabetic,
+citestyle=authoryear
+]{biblatex}
+
+\mybibliography{}
+
+\usepackage{array}
+\newcolumntype{P}{>{\normalsize}p{2.5cm}}
+
+\usepackage{ltablex}
+
+\newcommand{\header}[1]{
+\fontsize{16pt}{25pt}\titfont\selectfont
+        >  #1 
+        \vspace{.2cm}
+        \hrule
+    
+    \fontsize{13pt}{12pt}\secfont\selectfont}
+\newcommand{\entry}[3]{#1 & \titfont #2 \newline \secfont\normalsize #3 \vspace{.1cm}\\}
+\newcommand{\entryShort}[2]{\secfont #1 & \titfont #2 \vspace{.1cm}\\}
+\newcommand{\entrySkill}[2]{\titfont #1 & \secfont #2\\}
+\newcommand{\experience}[2]{
+    \header{#1}
+    \begin{tabularx}{\linewidth}{P | X}
+        #2
+    \end{tabularx}
+}
+
+\newcommand{\aboutMe}[1]{
+\fontsize{11pt}{12pt}\secfont\selectfont
+
+#1
+
+\vspace{.2cm}}
+
+\newcommand{\skill}[2]{
+    \header{#1}
+    \begin{tabular}{r >{\normalsize}l}
+        #2
+    \end{tabular}
+}
+
+\newcommand{\contacts}[2]{
+    \fontsize{16pt}{25pt}\titfont\selectfont
+        \begin{center} #1 \end{center}
+    \fontsize{11pt}{12pt}\secfont\selectfont
+    \begin{tabularx}{\linewidth}{X X X}
+        #2
+    \end{tabularx}
+}
